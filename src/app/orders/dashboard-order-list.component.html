@@ -1,0 +1,68 @@
+<div fxLayout="row wrap">
+    <!-- column -->
+    <div fxFlex.gt-sm="100" fxFlex.gt-xs="100">
+        <mat-card>
+            <mat-card-content>
+                <mat-form-field class="search-text">
+                    <input type="text" matInput [(ngModel)]="searchKeyword" placeholder="Search">
+                    <mat-icon matSuffix>search</mat-icon>
+                </mat-form-field>
+
+                <div>
+                    <mat-form-field>
+                        <mat-label>Selected Month</mat-label>
+                        <mat-select [(ngModel)]="selectedValue" name="month" (selectionChange)="this.refreshData()">
+                            <mat-option *ngFor="let month of Month" [value]="month.value">
+                                {{month.display}}
+                            </mat-option>
+                        </mat-select>
+                    </mat-form-field>
+                </div>
+            </mat-card-content>
+        </mat-card>
+    </div>
+</div>
+
+<div fxLayout="row wrap">
+    <!-- column -->
+    <div fxFlex.gt-sm="100" fxFlex.gt-xs="100">
+        <mat-card>
+            <mat-card-content>
+                <table>
+                    <tr>
+                        <th>Order Date</th>
+                        <th>Order Number</th>
+                        <th>Customer Name</th>
+                        <th>Telephone</th>
+                        <th>Status</th>
+                        <th>QTY</th>
+                        <th>Total</th>
+                        <th>Fullfillment Cost</th>
+                        <th>Delivery Type</th>
+                        <th>Tracking#</th>
+                    </tr>
+                    <tr
+                        *ngFor="let order of orders | dashboardOrderFilter: {order_name:searchKeyword, customer_name:searchKeyword, telephone:searchKeyword, Carrier:searchKeyword, distant:searchKeyword}">
+                        <td>{{order.created_time  | date:'MMM d, y' : '+0700'}}</td>
+                        <!-- <td>{{order.Channel}}</td> -->
+                        <!-- <td><a href="/odetail/{{order.order_id}}">{{order.order_id}}<span
+                                    *ngIf="order.order_name">({{order.order_name}})</span></a></td> -->
+                        <td><a href="/odetail/{{order.order_id}}">{{order.order_id}}</a></td>
+                        <td><a href="/onew/{{order.customer_code}}">{{order.customer_name}}</a></td>
+                        <td>{{order.telephone}}</td>
+                        <td>{{order.status}}</td>
+                        <td>{{order.product_quantity}}</td>
+                        <td>{{order.order_amount_without_delivery | number : '1.2-2'}}</td>
+                        <td>{{order.cost}}</td>
+                        <td><a href="https://tracking.pgffm.com/{{orgName}}/{{order.order_name}}">{{order.Carrier}}
+                                ({{order.distant}})</a></td>
+                        <td>
+                            {{order.tracking_number}}
+                        </td>
+                    </tr>
+
+                </table>
+            </mat-card-content>
+        </mat-card>
+    </div>
+</div>

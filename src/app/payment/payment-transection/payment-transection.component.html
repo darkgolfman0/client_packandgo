@@ -1,0 +1,68 @@
+<div fxLayout="row wrap">
+    <!-- column -->
+    <div fxFlex.gt-sm="100" fxFlex.gt-xs="100">
+        <mat-card>
+            <mat-card-header>
+                <mat-card-title>Payment Transaction</mat-card-title>
+            </mat-card-header>
+            <mat-card-content>
+                <mat-form-field class="search-text">
+                    <input type="text" matInput [(ngModel)]="searchKeyword" placeholder="Search">
+                    <mat-icon matSuffix>search</mat-icon>
+                </mat-form-field>
+                <div>
+                    <mat-form-field>
+                        <mat-label>Selected Month</mat-label>
+                        <mat-select [(ngModel)]="selectedValue" name="month" (selectionChange)="this.refreshData()">
+                            <mat-option *ngFor="let month of Month" [value]="month.value">
+                                {{month.display}}
+                            </mat-option>
+                        </mat-select>
+                    </mat-form-field>
+                </div>
+                <div style="text-align: center">
+                    <button mat-raised-button color="primary" (click)="exportCsv()">Export To CSV</button>
+                </div>
+            </mat-card-content>
+        </mat-card>
+    </div>
+</div>
+
+<div fxLayout="row wrap">
+    <!-- column -->
+    <div fxFlex.gt-sm="100" fxFlex.gt-xs="100">
+        <mat-card>
+            <mat-card-content>
+                <table>
+                    <tr>
+                        <th>Order ID</th>
+                        <th>Customer Type</th>
+                        <th>Urgent Order</th>
+                        <th>Picked</th>
+                        <th>Packed</th>
+                        <th>Pick Cost</th>
+                        <th>Pack Cost</th>
+                        <th>FTE Cost</th>
+                        <th>FTE Full Cost</th>
+                        <th>Extra Material</th>
+                        <th>Packaging</th>
+                    </tr>
+                    <tr
+                        *ngFor="let p of paymentData | paymentTransactionFilter: {orderID:searchKeyword, type:searchKeyword, urgentOrder:searchKeyword}">
+                        <td><a href="odetail/{{p.orderID}}">{{p.orderID}}</a></td>
+                        <td>{{p.type}}</td>
+                        <th style="font: inherit;">{{p.urgentOrder}}</th>
+                        <td>{{p.picked}}</td>
+                        <td>{{p.packed}}</td>
+                        <td>{{p.pickcost}}</td>
+                        <td>{{p.packcost}}</td>
+                        <td>{{p.ftecost }}</td>
+                        <td>{{p.fteFullCost}}</td>
+                        <td>{{p.extraPickcost}}</td>
+                        <td>{{p.Packaging}}</td>
+                    </tr>
+                </table>
+            </mat-card-content>
+        </mat-card>
+    </div>
+</div>

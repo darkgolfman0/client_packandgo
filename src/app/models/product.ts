@@ -1,0 +1,29 @@
+export class Product {
+  id: number;
+  product_id: string;
+  principle_id: string;
+  category: string;
+  variance: string;
+  ean: string;
+  product_detail: string;
+  product_unit_name: string;
+  short_description: string;
+  short_description_thai: string;
+  production_lead_time: number;
+  unit_price: number;
+  uom: number;
+  suom: number;
+  unit_width: number;
+  unit_long: number;
+  unit_height: number;
+  unit_weight: number;
+  outer_width: number;
+  outer_long: number;
+  outer_height: number;
+  outer_weight: number;
+  status: string;
+  created_time: Date;
+  updated_time: Date;
+  quantity_onhand: number;
+  stock_inventory_id: number;
+}

@@ -1,0 +1,86 @@
+<mat-card>
+  <mat-card-header>
+    <h2 mat-subheader>Customers</h2>
+    <button style="height: 40px;top:38px; color: blue" mat-raised-button (click)="onToggleFab()"
+      [disabled]="disableButton">
+      <i class="material-icons">add</i>
+      New Customer</button>
+  </mat-card-header>
+  <mat-card-content>
+    <mat-form-field class="search-text">
+      <input type="text" matInput [(ngModel)]="searchKeyword" placeholder="Search">
+      <mat-icon matSuffix>search</mat-icon>
+    </mat-form-field>
+    <span>
+      <button style="left: 20px" mat-raised-button color="primary" (click)="searchKeywords()"
+        [disabled]="disableButton">
+        <mat-icon matSuffix>search</mat-icon> Search DB
+      </button>
+      <button style="left: 30px" mat-raised-button color="primary" (click)="resetKeywords()" [disabled]="disableButton">
+        Reset
+      </button>
+    </span>
+    <!-- <mat-checkbox [(ngModel)]="retriveAll" (change)="refreshData()">all</mat-checkbox> -->
+  </mat-card-content>
+</mat-card>
+
+<div fxLayout="row wrap">
+  <!-- column -->
+  <div fxFlex.gt-sm="100" fxFlex.gt-xs="100">
+    <mat-card>
+      <mat-card-content role="listitem">
+        <table>
+          <tr>
+            <th>Make Order</th>
+            <th>Name</th>
+            <th>Type</th>
+            <th>Telephone</th>
+            <th>Address</th>
+          </tr>
+          <tr
+            *ngFor="let customer of customers | customerFilter: {customer_name: searchKeyword, address: searchKeyword, telephone: searchKeyword, ref_data: searchKeyword,note: searchKeyword, customer_code: searchKeyword}">
+            <td style="text-align: center"><a class="text-info"
+                href="/onew/{{customer.customer_code}}-{{customer.address_id}}">
+                <i class="material-icons">post_add</i></a>
+            </td>
+            <td><a class="text-primary"
+                href="/cdetail/{{customer.customer_code}}-{{customer.address_id}}">{{customer.customer_name}}</a>
+            </td>
+            <td>{{customer.customer_type}}</td>
+            <td>{{customer.telephone}}</td>
+            <td>{{customer.address}} {{customer.sub_district}} {{customer.district}} {{customer.province}}</td>
+          </tr>
+        </table>
+      </mat-card-content>
+    </mat-card>
+  </div>
+</div>
+
+<!-- <mat-card>
+  <mat-card-content>
+    <mat-list-item role="listitem"
+      *ngFor="let customer of customers | customerFilter: {customer_name: searchKeyword, address: searchKeyword, telephone: searchKeyword, ref_data: searchKeyword,note: searchKeyword, customer_code: searchKeyword}">
+      <mat-card class="customer-list-card">
+        <mat-card-header>
+          <div mat-card-avatar class="customer-card-header-image"></div>
+          <mat-card-title>{{customer.customer_name}}</mat-card-title>
+          <mat-card-subtitle><strong>{{customer.customer_type}}</strong> {{customer.customer_code}}</mat-card-subtitle>
+        </mat-card-header>
+        <mat-card-content>
+          <p>
+            <strong>Phone: </strong>{{customer.telephone}}<br>
+            <span *ngIf="customer.ref_data"><strong>Reference: </strong>{{customer.ref_data}}<br></span>
+            <span *ngIf="customer.note"><strong>Note: </strong>{{customer.note}}<br></span>
+            <strong>Address: </strong>{{customer.address}} {{customer.postcode}}
+          </p>
+        </mat-card-content>
+        <mat-card-actions>
+          <a mat-raised-button routerLink="/cdetail/{{customer.customer_code}}-{{customer.address_id}}"
+            routerLinkActive="active"><i class="material-icons">search</i>VIEW DETAIL</a>
+          <a mat-raised-button routerLink="/onew/{{customer.customer_code}}-{{customer.address_id}}"
+            routerLinkActive="active" [disabled]="disableButton"><i class="material-icons">post_add</i>MAKE ORDER</a>
+        </mat-card-actions>
+      </mat-card>
+    </mat-list-item>
+  </mat-card-content>
+</mat-card> -->

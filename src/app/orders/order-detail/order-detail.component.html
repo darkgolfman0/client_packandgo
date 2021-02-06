@@ -1,0 +1,285 @@
+<mat-card>
+  <!-- <mat-card-header></mat-card-header> -->
+  <mat-card-content>
+  <mat-accordion class="example-headers-align">
+    <mat-expansion-panel [expanded]="true" hideToggle>
+      <mat-expansion-panel-header>
+        <mat-panel-title>
+            <h3 mat-subheader>Order: {{orderHeader.order_id}}</h3>
+          <!--<mat-icon>account_circle</mat-icon>-->
+          <!-- <strong>Order ID:</strong>&nbsp; {{orderHeader.order_id}} -->
+        </mat-panel-title>
+      </mat-expansion-panel-header>
+        <mat-chip-list>
+          <mat-chip color="accent" selected (click)="statusUpdate('confirmed', false)" *ngIf="orderHeader.confirmed; else notConfirmed">Confirmed</mat-chip>
+          <ng-template #notConfirmed><mat-chip (click)="statusUpdate('confirmed', true)">Not Confirm</mat-chip></ng-template>
+
+          <mat-chip color="accent" selected (click)="statusUpdate('picked', false)" *ngIf="orderHeader.picked; else notPicked">Picked</mat-chip>
+          <ng-template #notPicked><mat-chip (click)="statusUpdate('picked', true)">Not Picked</mat-chip></ng-template>
+
+          <mat-chip color="accent" selected (click)="statusUpdate('packed', false)" *ngIf="orderHeader.packed; else notPacked">Packed {{orderHeader.delivery_type}} {{orderHeader.tracking_number}}</mat-chip>
+          <ng-template #notPacked><mat-chip (click)="statusUpdate('packed', true)">Not Packed</mat-chip></ng-template>
+
+          <mat-chip color="accent" selected (click)="statusUpdate('shipped', false)" *ngIf="orderHeader.shipped; else notShipped">Shipped</mat-chip>
+          <ng-template #notShipped><mat-chip (click)="statusUpdate('shipped', true)">Not Shipped</mat-chip></ng-template>
+
+          <mat-chip color="primary" selected *ngIf="orderHeader.urgent; else notUrgent" (click)="statusUpdate('urgent', false)">Urgent order</mat-chip>
+          <ng-template #notUrgent><mat-chip (click)="statusUpdate('urgent', true)">Not urgent</mat-chip></ng-template>
+          <mat-chip color="primary" selected *ngIf="orderHeader.partial_ship">Allow partial shipment</mat-chip>
+        </mat-chip-list>
+      <br>
+        <table class="example-full-width" cellspacing="0">
+          <tr>
+            <td>
+              <mat-form-field class="example-full-width">
+                <input matInput placeholder="ชื่อลูกค้า" [(ngModel)]="orderHeader.customer_name" required [disabled]="orderHeader.confirmed">
+              </mat-form-field>
+            </td>
+          </tr>
+          <tr>
+            <td><mat-form-field class="example-full-width customer-textarea">
+              <textarea matInput placeholder="ที่อยู่" [(ngModel)]="orderHeader.address_detail" required [disabled]="orderHeader.confirmed"></textarea>
+            </mat-form-field></td>
+          </tr>
+          <tr>
+            <td><mat-form-field class="example-full-width customer-textarea">
+              <textarea matInput placeholder="ตำบล" [(ngModel)]="orderHeader.sub_district" required [disabled]="orderHeader.confirmed"></textarea>
+            </mat-form-field></td>
+          </tr>
+          <tr>
+            <td><mat-form-field class="example-full-width customer-textarea">
+              <textarea matInput placeholder="อำเภอ" [(ngModel)]="orderHeader.district" required [disabled]="orderHeader.confirmed"></textarea>
+            </mat-form-field></td>
+          </tr>
+          <tr>
+            <td><mat-form-field class="example-full-width customer-textarea">
+              <textarea matInput placeholder="จังหวัด" [(ngModel)]="orderHeader.province" required [disabled]="orderHeader.confirmed"></textarea>
+            </mat-form-field></td>
+          </tr>
+          <tr>
+            <td><mat-form-field class="example-full-width">
+              <textarea matInput placeholder="รหัสไปรษณีย์" [(ngModel)]="orderHeader.postcode" required [disabled]="orderHeader.confirmed"></textarea>
+            </mat-form-field></td>
+          </tr>
+          <tr>
+            <td><mat-form-field class="example-full-width">
+              <input matInput placeholder="เบอร์โทรศัพท์" [(ngModel)]="orderHeader.customer_telephone" required [disabled]="orderHeader.confirmed">
+            </mat-form-field></td>
+          </tr>
+          <tr>
+            <td><mat-form-field class="example-full-width">
+              <input matInput placeholder="อ้างอิง เช่น ชื่อตัวแทนขาย" [(ngModel)]="orderHeader.customer_reference" [disabled]="orderHeader.confirmed">
+            </mat-form-field></td>
+          </tr>
+          <tr>
+            <td><mat-form-field class="example-full-width">
+              <input matInput placeholder="โน็ต เช่น Line ID" [(ngModel)]="orderHeader.note" [disabled]="orderHeader.confirmed">
+            </mat-form-field></td>
+          </tr>
+          <tr>
+            <td>
+              <mat-form-field class="example-full-width">
+                <input matInput placeholder="ประเภทลูกค้า" [(ngModel)]="orderHeader.customer_type" readonly>
+              </mat-form-field>
+            </td>
+          </tr>
+        </table>
+
+    </mat-expansion-panel>
+  </mat-accordion>
+</mat-card-content>
+</mat-card>
+
+<div *ngIf="showOrderDetailTable" class="tempOrderItem">
+  <mat-card>
+    <mat-card-content>
+  <table mat-table [dataSource]="orderDetailDatasource" class="mat-elevation-z8">
+
+    <ng-container matColumnDef="delete">
+      <th mat-header-cell *matHeaderCellDef>
+      </th>
+      <td mat-cell *matCellDef="let items; let i = index">
+        <button mat-icon-button color="warn" (click)="removeItemClick(i)" [disabled]="orderHeader.confirmed">
+          <mat-icon aria-label="delete">delete_forever</mat-icon>
+        </button>
+      </td>
+      <td mat-footer-cell *matFooterCellDef></td>
+    </ng-container>
+
+    <ng-container matColumnDef="product_detail">
+      <th mat-header-cell *matHeaderCellDef> รายการ </th>
+      <td mat-cell *matCellDef="let items"><div class="tableFont">{{items.product_detail}}</div></td>
+      <td mat-footer-cell *matFooterCellDef></td>
+    </ng-container>
+
+    <ng-container matColumnDef="product_unit_price">
+      <th mat-header-cell *matHeaderCellDef> ราคาต่อหน่วย </th>
+      <td mat-cell *matCellDef="let items"><div class="tableFont">{{items.product_unit_price | number:'1.2'}}</div></td>
+      <td mat-footer-cell *matFooterCellDef></td>
+    </ng-container>
+
+    <ng-container matColumnDef="product_quantity">
+      <th mat-header-cell *matHeaderCellDef> จำนวน </th>
+      <td mat-cell *matCellDef="let items"><div class="tableFont">{{items.product_quantity}}</div></td>
+      <td mat-footer-cell *matFooterCellDef></td>
+    </ng-container>
+
+    <ng-container matColumnDef="discount_for_item">
+      <th mat-header-cell *matHeaderCellDef> ส่วนลด </th>
+      <td mat-cell *matCellDef="let items"><div class="tableFont">{{items.discount_for_item | number:'1.2'}}</div></td>
+      <td mat-footer-cell *matFooterCellDef> ราคารวม </td>
+    </ng-container>
+
+    <ng-container matColumnDef="product_total_price">
+      <th mat-header-cell *matHeaderCellDef> ราคา </th>
+      <td mat-cell *matCellDef="let items"><div class="tableFont">{{items.product_total_price | number:'1.2'}}</div></td>
+      <td mat-footer-cell *matFooterCellDef> {{ totalProductPrice | number:'1.2'}} </td>
+    </ng-container>
+
+    <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+    <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+    <tr mat-footer-row *matFooterRowDef="displayedColumns"></tr>
+  </table>
+</mat-card-content>
+</mat-card>
+</div>
+
+<mat-card><mat-card-content>
+  <div *ngIf="showAddNewItemButton">
+    <button mat-stroked-button color="primary" class="fab-toggler"
+            (click)="addNewItemClick()" [disabled]="orderHeader.confirmed">
+      <i class="material-icons">add</i> เพิ่มสินค้า
+    </button>
+    <br>
+  </div>
+
+  <div *ngIf="showAddNewItemPanel" class="addNewItemPanel">
+    <!--<form class="customer-form" [formGroup]="newOrderDetailForm">-->
+      <mat-form-field class="product-select-form">
+      <mat-select placeholder="สินค้า" (selectionChange)="getInitialTempOrderDetail($event.value)" [(ngModel)]="addingProduct" class="product-ddl">
+        <mat-option *ngFor="let product of products" [value]="product">
+          {{product.product_detail}}
+        </mat-option>
+      </mat-select>
+    </mat-form-field>
+    <br>
+    <mat-form-field>
+      <input matInput placeholder="ราคาต่อชิ้น" type="number" class="example-right-align" (change)="unitOrQtyChange()" [(ngModel)]="addingUnitPrice" required readonly>
+      <span matSuffix>บาท</span>
+    </mat-form-field>
+    <br>
+    <mat-form-field>
+      <input matInput placeholder="จำนวน" type="number" class="example-right-align" (change)="unitOrQtyChange()" [(ngModel)]="addingQty" required>
+      <span matSuffix>ชิ้น</span>
+    </mat-form-field>
+    <button mat-stroked-button color="primary" (click)="unitOrQtyChangeRemove()"><i class="material-icons">remove</i></button>
+    <button mat-stroked-button color="primary" (click)="unitOrQtyChangeAdd()"><i class="material-icons">add</i></button>
+    <br>
+    <mat-form-field>
+      <input matInput placeholder="ส่วนลด" type="number" class="example-right-align" (change)="discountChange()" [(ngModel)]="addingDiscount">
+      <span matSuffix>บาท</span>
+    </mat-form-field>
+    <br>
+    <mat-form-field>
+      <input matInput placeholder="ราคารวม" type="number" class="example-right-align" (change)="totalPriceChange()" [(ngModel)]="addingTotalPrice" required>
+      <span matSuffix>บาท</span>
+    </mat-form-field>
+    <br><br>
+    <button mat-stroked-button color="warn" (click)="insertTempOrderDetailClearForm()"><i class="material-icons">delete_forever</i> ยกเลิก</button>
+      <br><br>
+      <button mat-stroked-button color="primary" (click)="insertTempOrderDetail()"><i class="material-icons">add</i> เพิ่มสินค้า</button>
+  </div>
+</mat-card-content>
+</mat-card>
+<br>
+<mat-card><mat-card-content>
+<table>
+<tr>
+  <td>
+    <mat-form-field>
+      <mat-select placeholder="วิธีการจัดส่ง" [(ngModel)]="orderHeader.delivery_type" (selectionChange)="deliveryMethodChange($event.value)" required [disabled]="orderHeader.confirmed">
+        <mat-option *ngFor="let dm of deliveryMethods" [value]="dm.ref_name" [disabled]="orderHeader.confirmed">
+          {{dm.ref_name}}
+        </mat-option>
+      </mat-select>
+    </mat-form-field>
+  </td>
+</tr>
+<tr>
+  <td>
+    <mat-form-field>
+      <input matInput placeholder="ราคาค่าจัดส่ง" [(ngModel)]="orderHeader.delivery_fee" type="number" class="example-right-align" (change)="deliveryFeeChange()" required [disabled]="orderHeader.confirmed">
+      <span matSuffix>บาท</span>
+    </mat-form-field>
+  </td>
+</tr>
+</table>
+</mat-card-content>
+</mat-card>
+<br>
+<mat-card>
+  <mat-card-header>
+    <mat-card-title>การชำระเงิน</mat-card-title>
+  </mat-card-header>
+<mat-card-content>
+    <br>
+    <mat-form-field>
+      <mat-select placeholder="สถานะการชำระเงิน" [(ngModel)]="orderHeader.payment_status" (selectionChange)="paymentStatusChange($event.value)" [disabled]="orderHeader.confirmed">
+        <mat-option value="จ่ายแล้ว">ชำระเงินแล้ว</mat-option>
+        <mat-option value="ยังไม่จ่าย">ยังไม่ชำระเงิน</mat-option>
+      </mat-select>
+    </mat-form-field>
+    <br>
+    <div *ngIf="showPaymentPanel">
+      <br>
+      <mat-form-field>
+        <input matInput placeholder="ยอดชำระเงิน" [(ngModel)]="orderHeader.payment_amount" type="number" class="example-right-align" (change)="deliveryFeeChange()" [disabled]="orderHeader.confirmed">
+        <span matSuffix>บาท</span>
+      </mat-form-field>
+      <br>
+      <mat-form-field>
+        <input matInput [matDatepicker]="dp3" placeholder="วันที่ชำระเงิน" [(ngModel)]="paymentDate" disabled>
+        <mat-datepicker-toggle matSuffix [for]="dp3" [disabled]="orderHeader.confirmed"></mat-datepicker-toggle>
+        <mat-datepicker #dp3 disabled="false"></mat-datepicker>
+      </mat-form-field>
+      <mat-form-field>
+        <mat-select placeholder="ชั่วโมง" [(ngModel)]="paymentHour" [disabled]="orderHeader.confirmed">
+          <mat-option *ngFor="let hr of hourOptions" [value]="hr">
+            {{hr}}
+          </mat-option>
+        </mat-select>
+      </mat-form-field>
+      <mat-form-field>
+        <mat-select placeholder="นาที" [(ngModel)]="paymentMinute" [disabled]="orderHeader.confirmed">
+          <mat-option *ngFor="let mn of minuteOptions" [value]="mn">
+            {{mn}}
+          </mat-option>
+        </mat-select>
+      </mat-form-field>
+    </div>
+  </mat-card-content>
+</mat-card>
+
+<mat-card><mat-card-content>
+  <table>
+    <tr><td>ราคาสินค้ารวม</td><td>{{totalProductPrice | number:'1.2'}} </td><td>บาท</td></tr>
+    <mat-divider></mat-divider>
+    <tr><td>ค่าจัดส่ง</td><td>{{orderHeader.delivery_fee | number:'1.2'}} </td><td>บาท</td></tr>
+    <mat-divider></mat-divider>
+    <tr><td><b>ราคารวม</b></td><td><b>{{totalProductPrice + orderHeader.delivery_fee | number:'1.2'}} </b></td><td><b>บาท</b></td></tr>
+    <mat-divider></mat-divider>
+    <tr><td>ยอดชำระเงิน</td><td>{{orderHeader.payment_amount | number:'1.2'}} </td><td>บาท</td></tr>
+    <mat-divider></mat-divider>
+    <tr><td>ส่วนต่าง</td><td>{{ (totalProductPrice + orderHeader.delivery_fee) -  orderHeader.payment_amount | number:'1.2'}} </td><td>บาท</td></tr>
+    <mat-divider></mat-divider>
+  </table>
+  <br><br>
+  <button mat-raised-button (click)="cancelOrder()">BACK</button>&nbsp;
+  <button mat-raised-button color="primary" (click)="submitOrder()" [disabled]="orderHeader.confirmed">SAVE CHANGE</button>
+</mat-card-content>
+</mat-card>
+
+<mat-card><mat-card-content>
+    <button mat-raised-button color="warn" (click)="deleteOrder()" [disabled]="orderHeader.confirmed">DELETE ORDER</button>&nbsp;
+  </mat-card-content>
+  </mat-card>

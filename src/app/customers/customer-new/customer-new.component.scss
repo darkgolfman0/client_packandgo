@@ -1,0 +1,38 @@
+.customer-container {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  max-width: 400px;
+}
+
+.customer-container > * {
+  width: 100%;
+}
+
+.customer-add-card > * {
+  width: 95%;
+}
+
+.customer-form > * {
+  width: 95%;
+}
+
+.example-full-width * {
+  width: 95%;
+}
+
+.customer-textarea * {
+  height: 5em;
+}
+
+// .customer-type-select * {
+//   //width: 40%;
+// }
+
+.customerTypeToggle * {
+  width: 130px;
+}
+
+//.customerTypeToggleButton {
+//  width: 120px;
+//}

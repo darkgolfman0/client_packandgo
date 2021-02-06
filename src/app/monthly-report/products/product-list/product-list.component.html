@@ -1,0 +1,47 @@
+<mat-card>
+  <mat-card-header>
+    <h2 mat-subheader>List of Inventory</h2>
+  </mat-card-header>
+  <mat-card-content>
+    <mat-form-field class="search-text">
+      <input type="text" matInput [(ngModel)]="searchKeyword" placeholder="Search">
+      <mat-icon matSuffix>search</mat-icon>
+    </mat-form-field>
+  </mat-card-content>
+</mat-card>
+
+<div fxLayout="row wrap">
+  <!-- column -->
+  <div fxFlex.gt-sm="100" fxFlex.gt-xs="100">
+    <mat-card>
+      <mat-card-content>
+        <table>
+          <tr>
+            <th>Product ID</th>
+            <th>Product Name</th>
+            <th>Stock on Hand</th>
+            <th>EAN</th>
+            <th>Category</th>
+            <th>Variance</th>
+            <th>Unit Price</th>
+            <th>Full Name</th>
+            <th>Quantity Visible</th>
+          </tr>
+          <tr role="listitem"
+            *ngFor="let product of products | productListFilter: {product_detail:searchKeyword, short_description:searchKeyword, short_description_thai:searchKeyword}">
+            <td><a href="smovement/{{product.product_id}}">{{product.product_id}}</a></td>
+            <td>{{product.short_description_thai}}</td>
+            <td>{{product.quantity_onhand | number}}</td>
+            <td>{{product.ean}}</td>
+            <td>{{product.category}}</td>
+            <td>{{product.VARIANCE}}</td>
+            <td>{{product.unit_price | number:'.2'}} บาท</td>
+            <td>{{product.product_detail}}</td>
+            <td>{{product.quantity_visible}}</td>
+          </tr>
+
+        </table>
+      </mat-card-content>
+    </mat-card>
+  </div>
+</div>

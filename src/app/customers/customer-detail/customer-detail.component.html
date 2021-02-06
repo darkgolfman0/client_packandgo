@@ -1,0 +1,90 @@
+<div class="customer-container">
+  <mat-card class="customer-add-card">
+    <mat-card-header>
+      <mat-card-title>Customer Information</mat-card-title>
+      <br><br>
+    </mat-card-header>
+    <mat-card-content class="customer-form">
+      <table class="example-full-width" cellspacing="0">
+        <tr>
+          <td>
+            <mat-form-field class="example-full-width">
+              <input matInput placeholder="ชื่อลูกค้า" [(ngModel)]="customer.customer_name" required>
+            </mat-form-field>
+          </td>
+        </tr>
+        <tr>
+          <td>
+            <mat-form-field class="example-full-width customer-textarea">
+              <textarea matInput placeholder="ที่อยู่" [(ngModel)]="customer.addresses[0].address" required></textarea>
+            </mat-form-field>
+          </td>
+        </tr>
+        <tr>
+          <td>
+            <mat-form-field class="example-full-width">
+              <textarea matInput placeholder="จังหวัด" [(ngModel)]="customer.addresses[0].province" required></textarea>
+            </mat-form-field>
+          </td>
+        </tr>
+        <tr>
+          <td>
+            <mat-form-field class="example-full-width">
+              <textarea matInput placeholder="อำเภอ" [(ngModel)]="customer.addresses[0].district" required></textarea>
+            </mat-form-field>
+          </td>
+        </tr>
+        <tr>
+          <td>
+            <mat-form-field class="example-full-width">
+              <textarea matInput placeholder="ตำบล" [(ngModel)]="customer.addresses[0].sub_district"
+                required></textarea>
+            </mat-form-field>
+          </td>
+        </tr>
+        <tr>
+          <td>
+            <mat-form-field class="example-full-width">
+              <input matInput placeholder="รหัสไปรษณีย์" [(ngModel)]="customer?.addresses[0].postcode" required>
+            </mat-form-field>
+          </td>
+        </tr>
+        <tr>
+          <td>
+            <mat-form-field class="example-full-width">
+              <input matInput placeholder="เบอร์โทรศัพท์" [(ngModel)]="customer?.addresses[0].telephone" required>
+            </mat-form-field>
+          </td>
+        </tr>
+        <tr>
+          <td>
+            <mat-form-field class="example-full-width">
+              <input matInput placeholder="อ้างอิง เช่น ชื่อตัวแทนขาย" [(ngModel)]="customer?.addresses[0].ref_data">
+            </mat-form-field>
+          </td>
+        </tr>
+        <tr>
+          <td>
+            <mat-form-field class="example-full-width">
+              <input matInput placeholder="โน็ต เช่น Line ID" [(ngModel)]="customer?.addresses[0].note">
+            </mat-form-field>
+          </td>
+        </tr>
+      </table>
+      <label>ประเภทของลูกค้า</label>
+      <br><br>
+      <mat-button-toggle-group class="customerTypeToggle" #group="matButtonToggleGroup"
+        [(ngModel)]="customer.customer_type" disabled>
+        <mat-button-toggle class="customerTypeToggleButton" *ngFor="let cType of customerTypeValue"
+          [value]="cType.value">
+          {{cType.value}}
+        </mat-button-toggle>
+      </mat-button-toggle-group>
+      <br><br>
+      <button type="submit" mat-raised-button color="primary" (click)="updateCustomer()">UPDATE</button>
+      <br><br>
+      <button mat-raised-button (click)="doCancel()">CANCEL</button>
+      <!--</form>-->
+    </mat-card-content>
+  </mat-card>
+</div>

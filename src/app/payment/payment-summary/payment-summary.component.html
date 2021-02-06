@@ -1,0 +1,151 @@
+<div fxLayout="row wrap">
+    <!-- column -->
+    <div fxFlex.gt-sm="100" fxFlex.gt-xs="100">
+        <mat-card>
+            <mat-card-header>
+                <mat-card-title>Payment Summary</mat-card-title>
+            </mat-card-header>
+            <mat-card-content>
+                <!-- <mat-form-field class="search-text">
+                    <input type="text" matInput [(ngModel)]="searchKeyword" placeholder="Search">
+                    <mat-icon matSuffix>search</mat-icon>
+                </mat-form-field> -->
+
+                <div>
+                    <mat-form-field>
+                        <mat-label>Selected Month</mat-label>
+                        <mat-select [(ngModel)]="selectedValue" name="month" (selectionChange)="this.refreshData()">
+                            <mat-option *ngFor="let month of Month" [value]="month.value">
+                                {{month.display}}
+                            </mat-option>
+                        </mat-select>
+                    </mat-form-field>
+                </div>
+            </mat-card-content>
+        </mat-card>
+    </div>
+</div>
+
+<div fxLayout="row wrap">
+    <!-- column -->
+    <div fxFlex.gt-sm="100" fxFlex.gt-xs="100">
+        <mat-card>
+            <mat-card-content>
+                <table>
+                    <tr>
+                        <th>Customer Type</th>
+                        <th>Pick Cost</th>
+                        <th>Pack Cost</th>
+                        <th>FTE Pack Cost</th>
+                        <th>Urgent Pack Cost</th>
+                        <th>Extra Pick Cost</th>
+                        <th>Packaging Cost</th>
+                    </tr>
+                    <tr>
+                        <td>Retail</td>
+                        <td>{{paymentData.pick_cost.Retail | number:'1.2'}}</td>
+                        <td>{{paymentData.pack_cost.Retail| number:'1.2'}}</td>
+                        <td>{{paymentData.fte_pack_cost.Retail| number:'1.2'}}</td>
+                        <td>{{paymentData.urgent_pack_cost.Retail| number:'1.2'}}</td>
+                        <td>{{paymentData.extra_pickedcost.Retail| number:'1.2'}}</td>
+                        <td>{{paymentData.packaging_cost.Retail| number:'1.2'}}</td>
+                    </tr>
+                    <tr>
+                        <td>Dealer</td>
+                        <td>{{paymentData.pick_cost.Dealer| number:'1.2'}}</td>
+                        <td>{{paymentData.pack_cost.Dealer| number:'1.2'}}</td>
+                        <td>{{paymentData.fte_pack_cost.Dealer| number:'1.2'}}</td>
+                        <td>{{paymentData.urgent_pack_cost.Dealer| number:'1.2'}}</td>
+                        <td>{{paymentData.extra_pickedcost.Dealer| number:'1.2'}}</td>
+                        <td>{{paymentData.packaging_cost.Dealer| number:'1.2'}}</td>
+                    </tr>
+                    <tr>
+                        <td>Business</td>
+                        <td>{{paymentData.pick_cost.Business| number:'1.2'}}</td>
+                        <td>{{paymentData.pack_cost.Business| number:'1.2'}}</td>
+                        <td>{{paymentData.fte_pack_cost.Business| number:'1.2'}}</td>
+                        <td>{{paymentData.urgent_pack_cost.Business| number:'1.2'}}</td>
+                        <td>{{paymentData.extra_pickedcost.Business| number:'1.2'}}</td>
+                        <td>{{paymentData.packaging_cost.Business| number:'1.2'}}</td>
+                    </tr>
+                    <tr>
+                        <td>Total</td>
+                        <td>{{paymentData.pick_cost.Retail + paymentData.pick_cost.Dealer + paymentData.pick_cost.Business| number:'1.2'}}
+                        </td>
+                        <td>{{paymentData.pack_cost.Retail + paymentData.pack_cost.Dealer + paymentData.pack_cost.Business| number:'1.2'}}
+                        </td>
+                        <td>{{paymentData.fte_pack_cost.Retail + paymentData.fte_pack_cost.Dealer + paymentData.fte_pack_cost.Business| number:'1.2'}}
+                        </td>
+                        <td>{{paymentData.urgent_pack_cost.Retail + paymentData.urgent_pack_cost.Dealer + paymentData.urgent_pack_cost.Business| number:'1.2'}}
+                        </td>
+                        <td>{{paymentData.extra_pickedcost.Retail + paymentData.extra_pickedcost.Dealer + paymentData.extra_pickedcost.Business| number:'1.2'}}
+                        </td>
+                        <td>{{paymentData.packaging_cost.Retail + paymentData.packaging_cost.Dealer + paymentData.packaging_cost.Business| number:'1.2'}}
+                        </td>
+                    </tr>
+                </table>
+            </mat-card-content>
+        </mat-card>
+    </div>
+</div>
+
+<div fxLayout="row wrap">
+    <div fxFlex.gt-sm="100" fxFlex.gt-xs="100">
+        <mat-card>
+            <mat-card-content>
+                <table>
+                    <div style="font-size: 16px">
+                        <tr>
+                            <td class="td2">Logistic Cost</td>
+                            <td class="td2">{{paymentData.logistic_cost.logisticCost | number:'1.2'}}</td>
+                        </tr>
+                        <div style="margin-top: 20px">
+                            <tr>
+                                <td class="td2">Messenger Call</td>
+                                <td class="td2">{{paymentData.Messenger_Call.Messenger_Call|number:'1.2'}}</td>
+                            </tr>
+                            <tr>
+                                <td class="td2">Area Cost</td>
+                                <td class="td2">{{paymentData.areaCost.areaCost|number:'1.2'}}</td>
+                            </tr>
+                            <tr>
+                                <td class="td2">Pack&Go Billing</td>
+                                <td class="td2">{{paymentData.PackandGoBilling.PackandGoBilling + 
+                                                paymentData.pick_cost.Retail + paymentData.pick_cost.Dealer + paymentData.pick_cost.Business +
+                                                paymentData.pack_cost.Retail + paymentData.pack_cost.Dealer + paymentData.pack_cost.Business +
+                                                paymentData.fte_pack_cost.Retail + paymentData.fte_pack_cost.Dealer + paymentData.fte_pack_cost.Business +
+                                                paymentData.urgent_pack_cost.Retail + paymentData.urgent_pack_cost.Dealer + paymentData.urgent_pack_cost.Business + 
+                                                paymentData.extra_pickedcost.Retail + paymentData.extra_pickedcost.Dealer + paymentData.extra_pickedcost.Business +
+                                                paymentData.packaging_cost.Retail + paymentData.packaging_cost.Dealer + paymentData.packaging_cost.Business +
+                                                paymentData.Messenger_Call.Messenger_Call + 
+                                                paymentData.areaCost.areaCost| number:'1.2'}}
+                                </td>
+                            </tr>
+                            <tr>
+                                <td class="td2">Total Order</td>
+                                <td class="td2">{{paymentData.total_order.totalOrder | number:'1.2'}}</td>
+                            </tr>
+                        </div>
+                        <div style="margin-top: 20px">
+                            <tr>
+                                <td>Total Billing</td>
+                                <td>{{
+                                                paymentData.logistic_cost.logisticCost +
+                                                paymentData.PackandGoBilling.PackandGoBilling + 
+                                                paymentData.pick_cost.Retail + paymentData.pick_cost.Dealer + paymentData.pick_cost.Business +
+                                                paymentData.pack_cost.Retail + paymentData.pack_cost.Dealer + paymentData.pack_cost.Business +
+                                                paymentData.fte_pack_cost.Retail + paymentData.fte_pack_cost.Dealer + paymentData.fte_pack_cost.Business +
+                                                paymentData.urgent_pack_cost.Retail + paymentData.urgent_pack_cost.Dealer + paymentData.urgent_pack_cost.Business + 
+                                                paymentData.extra_pickedcost.Retail + paymentData.extra_pickedcost.Dealer + paymentData.extra_pickedcost.Business +
+                                                paymentData.packaging_cost.Retail + paymentData.packaging_cost.Dealer + paymentData.packaging_cost.Business +
+                                                paymentData.Messenger_Call.Messenger_Call + 
+                                                paymentData.areaCost.areaCost| number:'1.2'}}
+                                </td>
+                            </tr>
+                        </div>
+                    </div>
+                </table>
+            </mat-card-content>
+        </mat-card>
+    </div>
+</div>

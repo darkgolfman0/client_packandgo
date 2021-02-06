@@ -1,0 +1,58 @@
+<!-- <app-pages-root> -->
+<div class="container">
+    <mat-card>
+        <mat-card-header>
+            <h2 mat-subheader>LogisticRecords</h2>
+        </mat-card-header>
+    </mat-card>
+
+    <mat-card>
+        <mat-card-content>
+            <span>
+                <mat-form-field>
+                    <mat-label>Selected Month</mat-label>
+                    <mat-select [(ngModel)]="selectedValue" name="month" (selectionChange)="this.refreshData()">
+                        <mat-option *ngFor="let month of Month" [value]="month.value">
+                            {{month.display}}
+                        </mat-option>
+                    </mat-select>
+                </mat-form-field>
+            </span>
+            <!-- <span>
+              <button class="command-button" mat-raised-button color="primary" (click)="createRecord()">ADD</button>
+            </span> -->
+            <!-- <span style="padding-left: 25px;">
+              <button mat-raised-button color="primary" (click)="exportCsv()">Export To CSV</button>
+            </span> -->
+
+        </mat-card-content>
+    </mat-card>
+
+    <mat-card>
+        <mat-card-content>
+            <p>Total Amount: {{totalAmount}}</p>
+        </mat-card-content>
+    </mat-card>
+
+    <mat-card>
+        <mat-card-content>
+            <table matSort (matSortChange)="sortData($event)">
+                <tr>
+                    <th mat-sort-header="date" width="85px">Date</th>
+                    <th mat-sort-header="id" width="85px">DeliveryID</th>
+                    <th mat-sort-header="method" width="85px">DeliveryMethod</th>
+                    <th mat-sort-header="amount" width="65px">Amount</th>
+                    <th mat-sort-header="note" width="70px">Note</th>
+                </tr>
+                <tr *ngFor="let item of sortedData; let i = index">
+                    <td>{{item.recorded_date | date:'d MMM y' : '+0700'}}</td>
+                    <td>{{item.delivery_method_id}}</td>
+                    <td>{{item.delivery_method}}</td>
+                    <td>{{item.amount}}</td>
+                    <td>{{item.note}}</td>
+                </tr>
+            </table>
+        </mat-card-content>
+    </mat-card>
+</div>
+<!-- </app-pages-root> -->

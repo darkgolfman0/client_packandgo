@@ -1,0 +1,203 @@
+.customer-container {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  //max-width: 500px;
+}
+//
+//.customer-container > * {
+//  width: 100%;
+//}
+//
+//.customer-add-card > * {
+//  width: 90%;
+//}
+//
+//.customer-form > * {
+//  width: 95%;
+//}
+//
+//.example-full-width * {
+//  width: 95%;
+//}
+//
+.customer-textarea * {
+  height: 3em;
+}
+//
+//.customer-type-select * {
+//  width: 40%;
+//}
+//
+//.customerTypeToggle * {
+//  width: 110px;
+//}
+//
+//.customerTypeToggleButton {
+//  width: auto;
+//}
+
+input, textarea {
+  width: 100%;
+}
+
+table {
+  width: 100%;
+}
+
+tr.mat-footer-row {
+  font-weight: bold;
+}
+
+.tempOrderItem {
+  font-size: x-small;
+}
+
+.addNewItemPanel {
+  font-size: small;
+}
+
+
+.product-select-form {
+  width: 100%;
+
+}
+
+.shoppingTable {
+  border: 1px solid #fff;
+  border-style: hidden;
+}
+//
+//.mat-expansion-panel {
+//  transition: none !important;
+//  box-shadow: none !important;
+//}
+.mat-card {
+  margin-top: 5px;
+  max-width: 800px;
+}
+
+
+.mat-card-title {
+  text-align: left
+}
+
+.mat-card-actions {
+  align-content: end;
+}
+
+.order-item-content {
+  font-size: x-small;
+}
+
+.item-card-title {
+  font-size: small;
+}
+
+table {
+  transition: none !important;
+  box-shadow: none !important;
+}
+tr {
+  text-align: left;
+}
+
+.item-card-header-image {
+  background-image: url('http://client.pgffm.com/assets/icons/order_icon.png');
+  background-size: cover;
+}
+
+.item-card-subtitle {
+  text-align: right;
+  font-size: small;
+  color: #ff4600;
+}
+
+.item-display {
+  //text-align: left;
+  font-size: small;
+  position: absolute;
+  left: 5px;
+}
+
+.customer-display-element {
+  text-align: left;
+  font-size: small;
+  position: absolute;
+  left: 5px;
+}
+
+.customer-display-element-right {
+  text-align: right;
+  font-size: small;
+  position: absolute;
+  right: 5px;
+}
+
+
+.customer-input-element {
+  text-align: left;
+  font-size: small;
+  position: absolute;
+  left: 5px;
+  width: 100%
+}
+
+.price-text {
+  color: blue;
+  font-size: medium;
+}
+
+.item-display-right {
+  //text-align: left;
+  font-size: small;
+  position: absolute;
+  right: 5px;
+}
+
+.items-list-card {
+  max-width: 750px;
+}
+
+.mat-grid-tile .mat-figure {
+  justify-content: flex-start !important ;
+  align-items: flex-start !important;
+}
+
+.tableFont {
+  font-size: x-small;
+}
+
+.discountText {
+  font-size: x-small;
+  color: #1c1407;
+}
+
+.cross-text {
+  text-decoration: line-through;
+  color: gray;
+}
+
+.item-quantity-text {
+  font-size: medium;
+  color: blue;
+}
+
+.item-batch {
+  font-size: x-small;
+  //color: gray;
+  color: #ff4600;
+}
+
+.item-product-name {
+  color: #1f146e;
+}
+// css example
+span {
+  content: "\0E3F";
+}
+
+.width-100 {
+  width: 100%;
+  font-size: small;
+}

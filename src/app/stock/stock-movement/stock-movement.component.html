@@ -1,0 +1,111 @@
+<mat-card>
+    <mat-card-header>
+        <h2 mat-subheader>Stock Movement</h2>
+    </mat-card-header>
+    <mat-card-content>
+        <p>
+            <strong>Printciple: </strong>{{stocks.brand_id}}<br>
+            <strong>Product ID: </strong>{{stocks.product_id}}<br>
+            <strong>Product Name: </strong>{{stocks.short_description_thai}}<br>
+            <strong>Customer ID: </strong>{{stocks.customer_product_id}}<br>
+            <strong>Total quantity on hand: </strong>{{stocks.total_quantity_onhand}}<br>
+            <strong>Total quantity visable: </strong>{{stocks.total_quantity_visable}}<br>
+        </p>
+    </mat-card-content>
+</mat-card>
+
+<mat-card>
+    <mat-card-header>
+        <h2 mat-subheader>Batch Summary</h2>
+    </mat-card-header>
+    <mat-card-content>
+        <table>
+            <tr>
+                <th>Batch</th>
+                <th>Quantity</th>
+            </tr>
+            <tr *ngFor="let product of stocks.batches">
+                <td>{{product.batch}}</td>
+                <td>{{product.quantity_onhand}}</td>
+            </tr>
+
+        </table>
+    </mat-card-content>
+</mat-card>
+
+<mat-card>
+    <mat-card-header>
+        <h2 mat-subheader>Holding Order</h2>
+    </mat-card-header>
+    <mat-card-content>
+        <table>
+            <tr>
+                <th>Order ID</th>
+                <th>Customer Name</th>
+                <th>Order Date</th>
+                <th>Confirmed</th>
+                <th>Picked</th>
+                <th>Packed</th>
+                <th>Shipped</th>
+            </tr>
+            <tr *ngFor="let product of stocks.holding_order">
+                <td>{{product.order_id}}</td>
+                <td>{{product.customer_name}}</td>
+                <td>{{product.order_date}}</td>
+                <td *ngIf="product.confirmed == 1;else notcon">yes</td>
+                <ng-template #notcon>
+                    <td>no</td>
+                </ng-template>
+                <td *ngIf="product.picked == 1;else notpick">yes</td>
+                <ng-template #notpick>
+                    <td>no</td>
+                </ng-template>
+                <td *ngIf="product.packed == 1;else notpacked">yes</td>
+                <ng-template #notpacked>
+                    <td>no</td>
+                </ng-template>
+                <td *ngIf="product.shipped == 1;else notpacked">{{product.shipped}}</td>
+                <ng-template #notpacked>
+                    <td>no</td>
+                </ng-template>
+            </tr>
+
+        </table>
+    </mat-card-content>
+</mat-card>
+
+<div fxLayout="row wrap">
+    <!-- column -->
+    <div fxFlex.gt-sm="100" fxFlex.gt-xs="100">
+        <mat-card>
+            <mat-card-content>
+                <table>
+                    <tr>
+                        <th>Batch</th>
+                        <th>Adjsut_type</th>
+                        <th>Quantity</th>
+                        <th>Ref_id</th>
+                        <th>Remark</th>
+                        <th>Time Stamp</th>
+                        <th>Update By</th>
+                    </tr>
+                    <tr *ngFor="let product of stocks.items">
+                        <td>{{product.batch}}</td>
+                        <td>{{product.adjust_type}}</td>
+                        <td style="text-align: center;">{{product.quantity_adjusted | number}}</td>
+                        <td *ngIf='product.adjust_type !== "Good received";else haveDetail'>
+                            <a href="/odetail/{{product.adjust_type_ref_id}}">{{product.adjust_type_ref_id}}</a>
+                        </td>
+                        <ng-template #haveDetail>
+                            <td>{{product.adjust_type_ref_id}}</td>
+                        </ng-template>
+                        <td>{{product.remark}}</td>
+                        <td>{{product.created_time|date:'MMM d, y HH:mm' : '+0700'}}</td>
+                        <td>{{product.updated_by}}</td>
+                    </tr>
+
+                </table>
+            </mat-card-content>
+        </mat-card>
+    </div>
+</div>

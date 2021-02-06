@@ -1,0 +1,20 @@
+<h1 mat-dialog-title>Extra picked option</h1>
+<div mat-dialog-content>
+  <p>Please enter Extra picked items.</p>
+  <table>
+    <tr *ngFor="let ep of extraPicks">
+      <td>{{ ep.detail }}</td>
+      <td><mat-form-field class="example-full-width">
+        <input matInput type="number" [(ngModel)]="ep.quantity">
+      </mat-form-field></td>
+      <td><button mat-raised-button (click)="ep.quantity = onMinusClick(ep.quantity)">-</button></td>
+      <td><button mat-raised-button (click)="ep.quantity = onPlusClick(ep.quantity)">+</button></td>
+    </tr>
+    <tr><td>Total</td><td>{{ totalPicked }}</td></tr>
+  </table>
+</div>
+<div mat-dialog-actions>
+  <button mat-button (click)="onNoClick()">CANCEL</button>
+  <button mat-button (click)="onDeleteClick()">DELETE</button>
+  <button mat-button (click)="onYesClick()" cdkFocusInitial>SAVE</button>
+</div>

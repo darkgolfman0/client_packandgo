@@ -1,0 +1,113 @@
+<div class="customer-container">
+  <mat-card class="customer-add-card">
+    <mat-card-header>
+      <mat-card-title>เพิ่มลูกค้า</mat-card-title>
+      <br><br>
+    </mat-card-header>
+    <mat-card-content>
+      <form class="customer-form" (ngSubmit)="addCustomer()" [formGroup]="customerForm">
+        <table class="example-full-width" cellspacing="0">
+          <tr>
+            <td>
+              <mat-form-field class="example-full-width">
+                <input matInput placeholder="ชื่อลูกค้า" autocomplete="off" formControlName="customerName" required>
+              </mat-form-field>
+            </td>
+          </tr>
+          <tr>
+            <td>
+              <mat-form-field class="example-full-width customer-textarea">
+                <textarea matInput placeholder="address1" autocomplete="off" formControlName="customerAddress"
+                  required></textarea>
+              </mat-form-field>
+            </td>
+          </tr>
+          <tr>
+            <td>
+              <mat-form-field appearance="fill">
+                <mat-select placeholder="จังหวัด" (selectionChange)="changeProvince($event.value)"
+                  formControlName="customerProvince">
+                  <mat-option *ngFor="let province of provincedata" [value]="province.province">
+                    {{province.province}}
+                  </mat-option>
+                </mat-select>
+              </mat-form-field>
+            </td>
+          </tr>
+          <tr>
+            <td>
+              <mat-form-field appearance="fill">
+                <mat-select placeholder="อำเภอ" (selectionChange)="changeDistrict($event.value)"
+                  formControlName="customerDistrict">
+                  <mat-option *ngFor="let district of districtdata" [value]="district.district">
+                    {{district.district}}
+                  </mat-option>
+                </mat-select>
+              </mat-form-field>
+            </td>
+          </tr>
+          <tr>
+            <td>
+              <mat-form-field appearance="fill">
+                <mat-select placeholder="ตำบล" (selectionChange)="changeSubDistrict($event.value)"
+                  formControlName="customerSubdistrict">
+                  <mat-option *ngFor="let subdistrict of subdistrictdata" [value]="subdistrict.sub_district">
+                    {{subdistrict.sub_district}}
+                  </mat-option>
+                </mat-select>
+              </mat-form-field>
+            </td>
+          </tr>
+          <tr>
+            <td>
+              <!-- <mat-form-field class="example-full-width">
+                <textarea matInput placeholder="รหัสไปรษณีย์" formControlName="customerPostcode" required></textarea>
+              </mat-form-field> -->
+              <mat-form-field appearance="fill">
+                <mat-select placeholder="รหัสไปรษณีย์" formControlName="customerPostcode">
+                  <mat-option *ngFor="let postcode of postcodedata" [value]="postcode.postcode">
+                    {{postcode.postcode}}
+                  </mat-option>
+                </mat-select>
+              </mat-form-field>
+            </td>
+          </tr>
+          <tr>
+            <td>
+              <mat-form-field class="example-full-width">
+                <input matInput placeholder="เบอร์โทรศัพท์" autocomplete="off" formControlName="customerTelephone"
+                  required>
+              </mat-form-field>
+            </td>
+          </tr>
+          <tr>
+            <td>
+              <mat-form-field class="example-full-width">
+                <input matInput placeholder="อ้างอิง เช่น ชื่อตัวแทนขาย" autocomplete="off"
+                  formControlName="customerReference">
+              </mat-form-field>
+            </td>
+          </tr>
+          <tr>
+            <td>
+              <mat-form-field class="example-full-width">
+                <input matInput placeholder="โน็ต เช่น Line ID" autocomplete="off" formControlName="customerNote">
+              </mat-form-field>
+            </td>
+          </tr>
+        </table>
+        <label>ประเภทของลูกค้า</label>
+        <br><br>
+        <mat-button-toggle-group class="customerTypeToggle" #group="matButtonToggleGroup"
+          formControlName="customerType">
+          <mat-button-toggle class="customerTypeToggleButton" *ngFor="let cType of customerTypeValue"
+            [value]="cType.value">
+            {{cType.value}}
+          </mat-button-toggle>
+        </mat-button-toggle-group>
+        <br><br>
+        <button type="submit" mat-raised-button color="primary">เพิ่มลูกค้า</button>
+      </form>
+    </mat-card-content>
+  </mat-card>
+</div>

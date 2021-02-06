@@ -1,0 +1,11 @@
+<h1 mat-dialog-title>EMS Tracking</h1>
+<div mat-dialog-content>
+  <p>Please enter EMS tracking number.</p>
+  <mat-form-field>
+    <input matInput [(ngModel)]="data.trackingNumber">
+  </mat-form-field>
+</div>
+<div mat-dialog-actions>
+  <button mat-button (click)="onNoClick()">CANCEL</button>
+  <button mat-button (click)="onYesClick()" cdkFocusInitial>SAVE</button>
+</div>

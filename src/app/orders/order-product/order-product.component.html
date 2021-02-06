@@ -1,0 +1,68 @@
+<mat-card>
+  <mat-form-field class="product-select-form">
+    <mat-select placeholder="สินค้า" (selectionChange)="getInitialTempOrderDetail($event.value)"
+      [(ngModel)]="addingProduct">
+      <mat-option *ngFor="let product of products" [value]="product">
+        {{product.short_description}}
+      </mat-option>
+    </mat-select>
+  </mat-form-field>
+  <br>
+
+  <div *ngIf="!disableSave">
+    Product on-hand: {{totalOnHand}} units<br><br>
+    <mat-checkbox class="select-batch-button" [(ngModel)]="allowSelectBatch" [disabled]="blockBatchSelect">Specific
+      batch?</mat-checkbox><br>
+    <div [ngClass]="{ hideChildren : ele.class !== 'showChildren' }"
+      (click)="ele.class = ele.class == 'showChildren' ? '' :  'showChildren'" #ele>
+      <p style="color: blue;">
+        Show Lot Date
+      </p>
+      <div>
+        <mat-radio-group aria-labelledby="example-radio-group-label" class="example-radio-group"
+          [(ngModel)]="selectedBatch" [disabled]="!allowSelectBatch">
+          <mat-radio-button class="batch-list" *ngFor="let inv of stockInventory" [value]="inv"
+            (selectChange)="assignBatch($event.value)">
+            Lot Date: {{inv.created_time  | date:'d MMM y' : '+0700'}}, Batch# {{inv.batch}}, Quantity:
+            {{inv.quantity_onhand}}
+          </mat-radio-button>
+        </mat-radio-group>
+      </div>
+    </div>
+  </div>
+  <br><br>
+  <mat-form-field>
+    <input matInput placeholder="ราคาต่อชิ้น" type="number" class="example-right-align" (change)="unitOrQtyChange()"
+      [(ngModel)]="addingItem.product_unit_price" required readonly>
+    <span matSuffix>บาท</span>
+  </mat-form-field>
+  <br>
+  <mat-form-field>
+    <input matInput placeholder="จำนวน" type="number" autocomplete="off" class="example-right-align"
+      (change)="unitOrQtyChange()" [(ngModel)]="addingItem.product_quantity" required>
+    <span matSuffix>ชิ้น</span>
+  </mat-form-field>
+  <button mat-icon-button (click)="unitOrQtyChangeRemove()">
+    <mat-icon>remove</mat-icon>
+  </button>
+  <button mat-icon-button color="primary" (click)="unitOrQtyChangeAdd()">
+    <mat-icon>add</mat-icon>
+  </button>
+  <br>
+  <mat-form-field>
+    <input matInput placeholder="ส่วนลด" type="number" autocomplete="off" class="example-right-align"
+      (change)="discountChange()" [(ngModel)]="addingItem.discount_for_item">
+    <span matSuffix>บาท</span>
+  </mat-form-field>
+  <br>
+  <mat-form-field>
+    <input matInput placeholder="ราคารวม" type="number" autocomplete="off" class="example-right-align"
+      (change)="totalPriceChange()" [(ngModel)]="addingItem.product_total_price" required>
+    <span matSuffix>บาท</span>
+  </mat-form-field>
+  <br>
+  <button mat-flat-button color="primary" class="command-button" (click)="doClose()">CANCEL</button>
+  <button mat-flat-button color="primary" class="command-button" (click)="doSave()"
+    [disabled]="disableSave">ADD</button>
+
+</mat-card>

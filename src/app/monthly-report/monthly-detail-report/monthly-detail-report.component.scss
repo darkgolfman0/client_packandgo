@@ -1,0 +1,33 @@
+table {
+    font-size: small;
+    width: 100%;
+  }
+  
+  th {
+    font: bold;
+  }
+  
+  th, td {
+    padding: 5px;
+    text-align: left;
+    border-bottom: 1px solid #ddd;
+  }
+
+
+span{
+  padding-left: 10%;
+}
+
+.hideborder{
+  border-style: hidden;
+}
+
+.scrollbar{
+  height: 72.5ex;
+  width: 99%;
+  overflow: hidden;
+}
+
+.scrollbar:hover {
+  overflow: auto;
+}

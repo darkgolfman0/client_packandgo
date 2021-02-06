@@ -1,0 +1,78 @@
+.items-list-card{
+  margin: 1px;
+  align: left;
+}
+
+.search-text {
+
+  color: #140f45;
+  min-width: 500px;
+  //max-width: 800px;
+  font-size: small;
+}
+
+.container {
+  width: 95%;
+  padding: 0px 10px 0px;
+}
+
+.item-card-header-image {
+  background-image: url('http://client.pgffm.com/assets/images/product_icon.png');
+  background-size: cover;
+}
+
+.mat-card-title {
+  font-size: small;
+}
+
+.met-select {
+  width: 100%;
+}
+.table-button {
+  font-size: x-small;
+}
+
+.command-button {
+  margin: 5px;
+  //margin-right: 3px;
+}
+
+.batch-list {
+  font-size: x-small;
+}
+
+.product-select-form {
+  font-size: small;
+}
+
+
+.hideChildren>div{
+  display: none;
+}
+
+.select-batch-button {
+  font-size: x-small;
+}
+
+strong {
+  color: darkblue;
+}
+
+table {
+  font-size: small;
+  width: 100%;
+  background-color: white;
+}
+
+
+th {
+  font-size: small;
+  font: bold;
+}
+
+th, td {
+  //padding: 1px;
+  text-align: left;
+  //border-bottom: 1px solid #ddd;
+}
+

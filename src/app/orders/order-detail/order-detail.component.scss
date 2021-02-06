@@ -1,0 +1,83 @@
+.customer-container {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  //max-width: 500px;
+}
+
+.customer-container > * {
+  width: 100%;
+}
+
+.customer-add-card > * {
+  width: 90%;
+}
+
+.customer-form > * {
+  width: 95%;
+}
+
+.example-full-width * {
+  width: 95%;
+}
+
+.customer-textarea * {
+  height: 2em;
+}
+
+.customer-type-select * {
+  width: 40%;
+}
+
+.customerTypeToggle * {
+  width: 110px;
+}
+
+.customerTypeToggleButton {
+  width: auto;
+}
+
+table {
+  width: 100%;
+}
+
+tr.mat-footer-row {
+  font-weight: bold;
+}
+
+.tempOrderItem {
+  font-size: x-small;
+}
+
+.addNewItemPanel {
+  font-size: small;
+  width: 100%;
+}
+
+.product-select-form {
+  width: 100%;
+
+}
+
+.product-ddl {
+  width: 100%;
+}
+
+.shoppingTable {
+  border: 1px solid #fff;
+  border-style: hidden;
+}
+//
+//.mat-expansion-panel {
+//  transition: none !important;
+//  box-shadow: none !important;
+//}
+
+table {
+  transition: none !important;
+  box-shadow: none !important;
+}
+
+.tableFont {
+  font-size: x-small;
+}

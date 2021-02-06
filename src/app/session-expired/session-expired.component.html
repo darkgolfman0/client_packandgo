@@ -1,0 +1,23 @@
+<div class="login-register" style="background-color: saddlebrown;">
+    <div class="login-register-box">
+        <mat-card class="m-t-10">
+            <mat-card-content>
+                <form id="loginForm">
+                    <div class="text-center">
+                        <img alt="homepage" src="assets/images/pg_logo_login.png">
+                    </div><br><br>
+                    <div class="text-center">
+                        Your login session has expired. <br><br>
+                    </div>
+                    <div fxLayout="row wrap">
+ 
+                        <div fxFlex.gt-sm="100" fxFlex.gt-xs="100" fxFlex="100">
+                            <button mat-raised-button color="primary" class="btn-block btn-lg m-t-20 m-b-20"
+                                (click)="login()" type="button">Back to login.</button><br><br>
+                        </div>
+                    </div>
+                </form>
+            </mat-card-content>
+        </mat-card>
+    </div>
+</div>

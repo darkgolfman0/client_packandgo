@@ -1,0 +1,55 @@
+//.fab-container {
+//  position: fixed;
+//  bottom: 15px;
+//  right: 15px;
+//  z-index: 100;
+//  display: flex;
+//  flex-direction: column-reverse;
+//  align-items: center;
+//
+//  > div {
+//    display: flex;
+//    flex-direction: column-reverse;
+//    align-items: center;
+//    margin-bottom: 5px;
+//
+//    button {
+//      margin-bottom: 17px;
+//    }
+//  }
+//}
+//
+//.fab-toggler {
+//  float: right;
+//  z-index: 100;
+//}
+
+.customer-list-card{
+  margin: 1px;
+  align: left;
+}
+
+.search-text {
+
+  color: #140f45;
+  min-width: 300px;
+  max-width: 500px;
+}
+
+.container {
+  width: 95%;
+  padding: 0px 10px 0px;
+}
+
+//.example-card {
+//  max-width: 400px;
+//}
+
+.customer-card-header-image {
+  background-image: url('https://client.pgffm.com/assets/icons/order_icon.png');
+  background-size: cover;
+}
+
+strong {
+  color: darkblue;
+}

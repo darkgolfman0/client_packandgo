@@ -1,0 +1,282 @@
+<mat-card>
+  <mat-card *ngIf="!showEditCustomerPanel">
+    <mat-card-content>
+      <mat-grid-list cols="8" rowHeight="20px">
+        <mat-grid-tile colspan="2" rowspan="1"><span class="customer-display-element"><b>ชื่อลูกค้า</b></span>
+        </mat-grid-tile>
+        <mat-grid-tile colspan="6" rowspan="1"><span
+            class="customer-display-element">{{orderHeader.customer_name}}</span></mat-grid-tile>
+        <mat-grid-tile colspan="8" rowspan="1">
+          <mat-divider></mat-divider>
+        </mat-grid-tile>
+        <mat-grid-tile colspan="2" rowspan="1"><span class="customer-display-element"><b>ประเภทลูกค้า</b></span>
+        </mat-grid-tile>
+        <mat-grid-tile colspan="6" rowspan="1"><span
+            class="customer-display-element">{{orderHeader.customer_type}}</span></mat-grid-tile>
+        <mat-grid-tile colspan="8" rowspan="1">
+          <mat-divider></mat-divider>
+        </mat-grid-tile>
+        <mat-grid-tile colspan="2" rowspan="1"><span class="customer-display-element"><b>ติดต่อ</b></span>
+        </mat-grid-tile>
+        <mat-grid-tile colspan="6" rowspan="1"><span
+            class="customer-display-element">{{orderHeader.customer_telephone}}</span></mat-grid-tile>
+        <mat-grid-tile colspan="8" rowspan="1">
+          <mat-divider></mat-divider>
+        </mat-grid-tile>
+        <mat-grid-tile colspan="2" rowspan="1"><span class="customer-display-element"><b>ที่อยู่</b></span>
+        </mat-grid-tile>
+        <mat-grid-tile colspan="6" rowspan="1"><span
+            class="customer-display-element">{{orderHeader.address_detail}}</span></mat-grid-tile>
+        <mat-grid-tile colspan="2" rowspan="1"><span class="customer-display-element"><b>จังหวัด</b></span>
+        </mat-grid-tile>
+        <mat-grid-tile colspan="6" rowspan="1"><span class="customer-display-element">{{orderHeader.province}}</span>
+        </mat-grid-tile>
+        <mat-grid-tile colspan="2" rowspan="1"><span class="customer-display-element"><b>อำเภอ</b></span>
+        </mat-grid-tile>
+        <mat-grid-tile colspan="6" rowspan="1"><span class="customer-display-element">{{orderHeader.district}}</span>
+        </mat-grid-tile>
+        <mat-grid-tile colspan="2" rowspan="1"><span class="customer-display-element"><b>ตำบล</b></span>
+        </mat-grid-tile>
+        <mat-grid-tile colspan="6" rowspan="1"><span
+            class="customer-display-element">{{orderHeader.sub_district}}</span>
+        </mat-grid-tile>
+        <mat-grid-tile colspan="2" rowspan="1"><span class="customer-display-element"><b>รหัสไปรษณีย์</b></span>
+        </mat-grid-tile>
+        <mat-grid-tile colspan="6" rowspan="1"><span class="customer-display-element">{{orderHeader.postcode}}</span>
+        </mat-grid-tile>
+        <mat-grid-tile colspan="8" rowspan="1">
+          <mat-divider></mat-divider>
+        </mat-grid-tile>
+        <mat-grid-tile *ngIf="orderHeader.customer_reference" colspan="2" rowspan="1"><span
+            class="customer-display-element"><b>อ้างอิง</b></span></mat-grid-tile>
+        <mat-grid-tile *ngIf="orderHeader.customer_reference" colspan="6" rowspan="1"><span
+            class="customer-display-element">{{orderHeader.customer_reference}}</span></mat-grid-tile>
+        <mat-grid-tile *ngIf="orderHeader.customer_reference" colspan="8" rowspan="1">
+          <mat-divider></mat-divider>
+        </mat-grid-tile>
+        <mat-grid-tile *ngIf="orderHeader.note" colspan="2" rowspan="1"><span
+            class="customer-display-element"><b>โน๊ต</b></span></mat-grid-tile>
+        <mat-grid-tile *ngIf="orderHeader.note" colspan="6" rowspan="1"><span
+            class="customer-display-element">{{orderHeader.note}}</span></mat-grid-tile>
+        <mat-grid-tile *ngIf="orderHeader.note" colspan="8" rowspan="1">
+          <mat-divider></mat-divider>
+        </mat-grid-tile>
+      </mat-grid-list>
+    </mat-card-content>
+    <mat-card-actions>
+      <button mat-button (click)="onEditCustomerClick(false)" [disabled]="disableAddItemButton">แก้ไข</button>
+    </mat-card-actions>
+  </mat-card>
+  <mat-card *ngIf="showEditCustomerPanel">
+    <mat-card-content>
+      <mat-grid-list cols="8" rowHeight="30px">
+        <mat-grid-tile colspan="8" rowspan="2"><span class="customer-input-element">
+            <mat-form-field class="width-100">
+              <input matInput placeholder="ชื่อลูกค้า" [(ngModel)]="orderHeader.customer_name" required>
+            </mat-form-field>
+          </span></mat-grid-tile>
+        <mat-grid-tile colspan="8" rowspan="3"><span class="customer-input-element">
+            <mat-form-field class="width-100 customer-textarea">
+              <textarea class="customer-textarea" matInput placeholder="ที่อยู่"
+                [(ngModel)]="orderHeader.address_detail" required></textarea>
+            </mat-form-field>
+          </span></mat-grid-tile>
+        <mat-grid-tile colspan="8" rowspan="3"><span class="customer-input-element">
+            <mat-form-field class="width-100 customer-textarea">
+              <textarea class="customer-textarea" matInput placeholder="จังหวัด" [(ngModel)]="orderHeader.province"
+                required></textarea>
+            </mat-form-field>
+          </span></mat-grid-tile>
+        <mat-grid-tile colspan="8" rowspan="3"><span class="customer-input-element">
+            <mat-form-field class="width-100 customer-textarea">
+              <textarea class="customer-textarea" matInput placeholder="อำเภอ" [(ngModel)]="orderHeader.district"
+                required></textarea>
+            </mat-form-field>
+          </span></mat-grid-tile>
+        <mat-grid-tile colspan="8" rowspan="3"><span class="customer-input-element">
+            <mat-form-field class="width-100 customer-textarea">
+              <textarea class="customer-textarea" matInput placeholder="ตำบล" [(ngModel)]="orderHeader.subDistrict"
+                required></textarea>
+            </mat-form-field>
+          </span></mat-grid-tile>
+        <mat-grid-tile colspan="8" rowspan="2"><span class="customer-input-element">
+            <mat-form-field class="width-100">
+              <input matInput placeholder="รหัสไปรษณีย์" [(ngModel)]="orderHeader.postcode" required>
+            </mat-form-field>
+          </span></mat-grid-tile>
+        <mat-grid-tile colspan="8" rowspan="2"><span class="customer-input-element">
+            <mat-form-field class="width-100">
+              <input matInput placeholder="เบอร์โทรศัพท์" [(ngModel)]="orderHeader.customer_telephone" required>
+            </mat-form-field>
+          </span></mat-grid-tile>
+        <mat-grid-tile colspan="8" rowspan="2"><span class="customer-input-element">
+            <mat-form-field class="width-100">
+              <input matInput placeholder="อ้างอิง เช่น ชื่อตัวแทนขาย" [(ngModel)]="orderHeader.customer_reference">
+            </mat-form-field>
+          </span></mat-grid-tile>
+        <mat-grid-tile colspan="8" rowspan="3"><span class="customer-input-element">
+            <mat-form-field class="width-100">
+              <input class="customer-textarea" matInput placeholder="โน็ต เช่น Line ID" [(ngModel)]="orderHeader.note">
+            </mat-form-field>
+          </span></mat-grid-tile>
+      </mat-grid-list>
+    </mat-card-content>
+    <mat-card-actions>
+      <button mat-button (click)="onEditCustomerClick(true)" [disabled]="disableAddItemButton">บันทึก</button>
+    </mat-card-actions>
+  </mat-card>
+  <br>
+  <div class="tempOrderItem">
+    <mat-list-item role="listitem" *ngFor="let od of orderDetails; let i = index">
+      <mat-card class="items-list-card">
+        <mat-card-content>
+          <mat-grid-list cols="8" rowHeight="20px">
+
+            <mat-grid-tile class="item-display" colspan="2" rowspan="5">
+              <div mat-card-avatar class="item-card-header-image"></div>
+            </mat-grid-tile>
+            <mat-grid-tile class="item-display" colspan="6" rowspan="3">
+              <div class="item-display item-product-name">
+                {{od.product_detail}}
+              </div>
+            </mat-grid-tile>
+            <mat-grid-tile colspan="6" rowspan="1">
+              <div *ngIf="isDisplayDiscount(od)" class="item-display">
+                <span class="cross-text"><span>&#3647;</span>{{od.product_unit_price | number:'1.2-2'}}</span><span
+                  class="discountText"><i> ลด {{discountPercent(od) | number:'1.2-2'}}%</i></span>
+              </div>
+            </mat-grid-tile>
+            <mat-grid-tile class="item-display" colspan="3" rowspan="1">
+              <div class="item-display">
+                ราคา
+                <span>&#3647;</span>{{od.product_unit_price - (od.discount_for_item/od.product_quantity) | number:'1.2-2'}}
+              </div>
+            </mat-grid-tile>
+            <mat-grid-tile class="item-display" colspan="3" rowspan="1">
+              <div class="item-display-right">
+                จำนวน <span class="item-quantity-text">{{od.product_quantity | number}}</span> {{od.product_unit_name}}
+              </div>
+            </mat-grid-tile>
+            <mat-grid-tile class="item-display" colspan="2" rowspan="1"></mat-grid-tile>
+            <mat-grid-tile class="item-display" colspan="6" rowspan="1">
+              <div *ngIf="od.batch" class="item-display item-batch">
+                <i>Specific Batch# {{od.batch}}</i>
+              </div>
+            </mat-grid-tile>
+            <mat-grid-tile class="item-display" colspan="2" rowspan="1">
+              <a mat-button color="warn" (click)="removeItemClick(i)">Delete</a>
+            </mat-grid-tile>
+            <mat-grid-tile class="item-display" colspan="6" rowspan="1">
+              <div class="item-display-right">
+                ราคารวม <span
+                  class="item-quantity-text"><b><span>&#3647;</span>{{od.product_total_price | number:'1.2-2'}}</b></span>
+              </div>
+            </mat-grid-tile>
+          </mat-grid-list>
+        </mat-card-content>
+      </mat-card>
+    </mat-list-item>
+    <br>
+    <mat-list-item>
+      <button mat-raised-button color="primary" (click)="popupOrderDetail()" [disabled]="disableAddItemButton">
+        <i class="material-icons">add</i> เพิ่มสินค้า</button>
+    </mat-list-item>
+  </div>
+  <br>
+  <mat-card>
+    <mat-grid-list cols="1" rowHeight="60px">
+      <mat-grid-tile colspan="1" rowspan="1"><span class="customer-display-element">
+          <mat-form-field class="width-100">
+            <mat-select placeholder="วิธีการจัดส่ง" [(ngModel)]="orderHeader.delivery_type"
+              (selectionChange)="deliveryMethodChange($event.value)" required>
+              <mat-option *ngFor="let dm of deliveryMethods" [value]="dm.ref_name">
+                {{dm.ref_name}}
+              </mat-option>
+            </mat-select>
+          </mat-form-field>
+        </span></mat-grid-tile>
+      <mat-grid-tile colspan="1" rowspan="1"><span class="customer-display-element">
+          <mat-form-field *ngIf="showDeliveryFee">
+            <input matInput placeholder="ราคาค่าจัดส่ง" [(ngModel)]="orderHeader.delivery_fee" type="number"
+              class="example-right-align" required>
+            <span matSuffix>บาท</span>
+          </mat-form-field>
+        </span></mat-grid-tile>
+    </mat-grid-list>
+  </mat-card>
+  <br>
+  <mat-card>
+    <mat-button-toggle-group [(ngModel)]="orderHeader.payment_status" (change)="paymentStatusChange($event.value)">
+      <mat-button-toggle value="จ่ายแล้ว">ชำระเงินแล้ว</mat-button-toggle>
+      <mat-button-toggle value="ยังไม่จ่าย">ยังไม่ชำระเงิน</mat-button-toggle>
+    </mat-button-toggle-group>
+    <br>
+    <mat-grid-list cols="8" rowHeight="30px">
+      <mat-grid-tile colspan="8" rowspan="1"></mat-grid-tile>
+      <mat-grid-tile colspan="8" rowspan="2"><span class="customer-display-element">
+          <mat-form-field>
+            <input matInput placeholder="ยอดชำระเงิน" [(ngModel)]="orderHeader.payment_amount" type="number"
+              class="example-right-align" (change)="deliveryFeeChange()">
+            <span matSuffix>บาท</span>
+          </mat-form-field>
+        </span></mat-grid-tile>
+      <mat-grid-tile *ngIf="showPaymentPanel" colspan="8" rowspan="2"><span class="customer-display-element">
+          <mat-form-field>
+            <input matInput [matDatepicker]="dp3" placeholder="วันที่ชำระเงิน" [(ngModel)]="paymentDate"
+              (dateChange)="getPaymentTime()" disabled>
+            <mat-datepicker-toggle matSuffix [for]="dp3"></mat-datepicker-toggle>
+            <mat-datepicker #dp3 disabled="false"></mat-datepicker>
+          </mat-form-field>
+        </span></mat-grid-tile>
+      <mat-grid-tile *ngIf="showPaymentPanel" colspan="4" rowspan="2">
+        <mat-form-field>
+          <mat-select placeholder="ชั่วโมง" [(ngModel)]="paymentHour" (selectionChange)="getPaymentTime()">
+            <mat-option *ngFor="let hr of hourOptions" [value]="hr">
+              {{hr}}
+            </mat-option>
+          </mat-select>
+        </mat-form-field>
+      </mat-grid-tile>
+      <mat-grid-tile *ngIf="showPaymentPanel" colspan="4" rowspan="2">
+        <mat-form-field>
+          <mat-select placeholder="นาที" [(ngModel)]="paymentMinute" (selectionChange)="getPaymentTime()">
+            <mat-option *ngFor="let mn of minuteOptions" [value]="mn">
+              {{mn}}
+            </mat-option>
+          </mat-select>
+        </mat-form-field>
+      </mat-grid-tile>
+    </mat-grid-list>
+  </mat-card>
+  <br>
+  <mat-card>
+    <mat-grid-list cols="8" rowHeight="20px">
+      <mat-grid-tile colspan="4" rowspan="1"><span class="customer-display-element"><i>ราคาสินค้ารวม</i></span>
+      </mat-grid-tile>
+      <mat-grid-tile colspan="3" rowspan="1"><span
+          class="customer-display-element-right"><i>{{totalProductPrice | number:'1.2'}}</i></span></mat-grid-tile>
+      <mat-grid-tile colspan="1" rowspan="1"><span class="customer-display-element"><i>บาท</i></span></mat-grid-tile>
+      <mat-grid-tile colspan="4" rowspan="1"><span class="customer-display-element"><i>ค่าจัดส่ง</i></span>
+      </mat-grid-tile>
+      <mat-grid-tile colspan="3" rowspan="1"><span
+          class="customer-display-element-right"><i>{{orderHeader.delivery_fee | number:'1.2'}}</i></span>
+      </mat-grid-tile>
+      <mat-grid-tile colspan="1" rowspan="1"><span class="customer-display-element"><i>บาท</i></span></mat-grid-tile>
+      <mat-grid-tile colspan="8" rowspan="1">
+        <mat-divider></mat-divider>
+      </mat-grid-tile>
+      <mat-grid-tile colspan="4" rowspan="1"><span class="customer-display-element"><b>ราคารวม</b></span>
+      </mat-grid-tile>
+      <mat-grid-tile colspan="3" rowspan="1"><span
+          class="customer-display-element-right price-text"><b>{{totalProductPrice + orderHeader.delivery_fee | number:'1.2'}}</b></span>
+      </mat-grid-tile>
+      <mat-grid-tile colspan="1" rowspan="1"><span class="customer-display-element">บาท</span></mat-grid-tile>
+      <mat-grid-tile colspan="8" rowspan="1">
+        <mat-divider></mat-divider>
+      </mat-grid-tile>
+    </mat-grid-list>
+    <br>
+    <button mat-raised-button (click)="cancelOrder()">ยกเลิก</button>&nbsp;&nbsp;
+    <button mat-raised-button color="primary" (click)="submitOrder()" [disabled]="pressingOrder">สั่งสินค้า</button>
+  </mat-card>
+</mat-card>

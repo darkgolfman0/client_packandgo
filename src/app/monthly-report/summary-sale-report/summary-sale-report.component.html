@@ -1,0 +1,86 @@
+<div fxLayout="row wrap">
+    <!-- column -->
+    <div fxFlex.gt-sm="100" fxFlex.gt-xs="100">
+        <mat-card>
+            <mat-card-header>
+                <mat-card-title>Summary Sale</mat-card-title>
+            </mat-card-header>
+            <mat-card-content>
+                <!-- <mat-form-field class="search-text">
+                    <input type="text" matInput [(ngModel)]="searchKeyword" placeholder="Search">
+                    <mat-icon matSuffix>search</mat-icon>
+                </mat-form-field> -->
+
+                <div>
+                    <mat-form-field>
+                        <mat-label>Selected Month</mat-label>
+                        <mat-select [(ngModel)]="selectedValue" name="month"
+                            (selectionChange)="this.getSummaryRepory()">
+                            <mat-option *ngFor="let month of Month" [value]="month.value">
+                                {{month.display}}
+                            </mat-option>
+                        </mat-select>
+                    </mat-form-field>
+                </div>
+                <div style="text-align: center">
+                    <button mat-raised-button color="primary" (click)="exportCsv()">Export To CSV</button>
+                </div>
+            </mat-card-content>
+        </mat-card>
+    </div>
+</div>
+
+<div fxLayout="row wrap">
+    <div fxFlex.gt-sm="100" fxFlex.gt-xs="100">
+        <mat-card>
+            <mat-card-content>
+                <table>
+                    <tr>
+                        <!-- <th style="border: hidden"></th> -->
+                        <th>Order ID</th>
+                        <th>Customer Type</th>
+                        <th>Customer Name</th>
+                        <th>Date Transfer</th>
+                        <th>Value Transfer</th>
+                        <th>Delivery Fee</th>
+                        <th>Delivery Type</th>
+                        <th>Seller</th>
+                        <th>Product Code</th>
+                        <th>Product</th>
+                        <th>Net Sale</th>
+                        <th>Order Quntity</th>
+
+                    </tr>
+                    <ng-container *ngFor='let data of getSummary'>
+                        <tr *ngFor='let item of data.items;let i = index'>
+
+                            <ng-container *ngIf='i==0; else notHeader'>
+                                <td class="order_header">{{data.order_id}}</td>
+                                <td class="order_header">{{data.customer_type}}</td>
+                                <td class="order_header">{{data.customer_name}}</td>
+                                <td class="order_header">{{data.date_transfer}}</td>
+                                <td class="order_header">{{data.payment_amount}}</td>
+                                <td class="order_header">{{data.delivery_fee}}</td>
+                                <td class="order_header">{{data.delivery_type}}</td>
+                                <td class="order_header">{{data.seller}}</td>
+                                <td class="order_header">{{item.product_code}}</td>
+                                <td class="order_header">{{item.product_detail}}</td>
+                                <td class="order_header">{{item.net_sale}}</td>
+                                <td class="order_header">{{item.quantity}}</td>
+                            </ng-container>
+                            <ng-template #notHeader>
+                                <td colspan="8"></td>
+                                <td>{{item.product_code}}</td>
+                                <td>{{item.product_detail}}</td>
+                                <td>{{item.net_sale}}</td>
+                                <td>{{item.quantity}}</td>
+                            </ng-template>
+
+
+                        </tr>
+                    </ng-container>
+                </table>
+            </mat-card-content>
+        </mat-card>
+    </div>
+</div>

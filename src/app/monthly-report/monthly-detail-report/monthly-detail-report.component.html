@@ -1,0 +1,109 @@
+<div fxLayout="row wrap">
+    <div fxFlex.gt-sm="100" fxFlex.gt-xs="100">
+        <mat-card>
+            <mat-card-header>
+                <mat-card-title>Monthly Detail</mat-card-title>
+            </mat-card-header>
+            <mat-card-content>
+                <!-- <mat-form-field class="search-text">
+                    <input type="text" matInput [(ngModel)]="searchKeyword" placeholder="Search">
+                    <mat-icon matSuffix>search</mat-icon>
+                </mat-form-field> -->
+
+                <div>
+                    <mat-form-field>
+                        <mat-label>Selected Month</mat-label>
+                        <mat-select [(ngModel)]="selectedValue" name="month"
+                            (selectionChange)="this.getMonthlyDetail()">
+                            <mat-option *ngFor="let month of Month" [value]="month.value">
+                                {{month.display}}
+                            </mat-option>
+                        </mat-select>
+                    </mat-form-field>
+                </div>
+                <span style="text-align: center">
+                    <button mat-raised-button color="primary" (click)="exportCsv()">Export To CSV</button>
+                </span>
+
+            </mat-card-content>
+        </mat-card>
+    </div>
+</div>
+
+<div fxLayout="row wrap">
+    <div fxFlex.gt-sm="100" fxFlex.gt-xs="100">
+        <mat-card class="scrollbar">
+            <mat-card-content>
+                <table>
+                    <tr>
+                        <!-- <th style="border: hidden"></th> -->
+                        <th>Order Date</th>
+                        <th>Order ID</th>
+                        <th>Customer Code</th>
+                        <th>Customer Name</th>
+                        <th>Product Code</th>
+                        <th>Product</th>
+                        <th>Order Quntity</th>
+                        <th>IT/CS</th>
+                        <th>Promotion</th>
+                        <th>Sale Value</th>
+                        <th>Discount</th>
+                        <th>Net Sale</th>
+                        <th>Brand</th>
+                        <th>Category</th>
+                        <th>Address</th>
+                        <th>Telephone</th>
+                        <th>Confirm</th>
+                        <th>Picked</th>
+                        <th>Packed</th>
+                        <th>Shipped</th>
+                        <th>Note</th>
+                        <th>Customer Type</th>
+                        <th>Delivery Fee</th>
+                        <th>Delivery Type</th>
+                        <th>Paid Status</th>
+                        <th>Tracking Number</th>
+                        <th>Sale+Shipping Fee</th>
+                        <th>Seller</th>
+                        <th>Date Transfer</th>
+                        <th>Value Transfer</th>
+                        <th>Urgent Order</th>
+                    </tr>
+                    <tr *ngFor='let data of getDetail'>
+                        <td>{{data.order_date}}</td>
+                        <td>{{data.order_id}}</td>
+                        <td>{{data.customer_code}}</td>
+                        <td>{{data.customer_name}}</td>
+                        <td>{{data.prdoduct_code}}</td>
+                        <td>{{data.product}}</td>
+                        <td>{{data.order_quantity}}</td>
+                        <td>{{data.it_cs}}</td>
+                        <td>{{data.promotion}}</td>
+                        <td>{{data.sale_value}}</td>
+                        <td>{{data.discount}}</td>
+                        <td>{{data.net_sale}}</td>
+                        <td>{{data.brand}}</td>
+                        <td>{{data.category}}</td>
+                        <td>{{data.address}}</td>
+                        <td>{{data.telephone}}</td>
+                        <td>{{data.confirm}}</td>
+                        <td>{{data.picked}}</td>
+                        <td>{{data.packed}}</td>
+                        <td>{{data.shipped}}</td>
+                        <td>{{data.note}}</td>
+                        <td>{{data.customer_type}}</td>
+                        <td>{{data.delivery_fee}}</td>
+                        <td>{{data.delivery_type}}</td>
+                        <td>{{data.paid_status}}</td>
+                        <td>{{data.tracking_number}}</td>
+                        <td>{{data.shipping_fees}}</td>
+                        <td>{{data.seller}}</td>
+                        <td>{{data.date_transfer}}</td>
+                        <td>{{data.value_transfer}}</td>
+                        <td>{{data.urgent_order}}</td>
+                    </tr>
+                </table>
+            </mat-card-content>
+        </mat-card>
+    </div>
+</div>

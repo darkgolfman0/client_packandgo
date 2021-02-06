@@ -1,0 +1,225 @@
+<!-- ============================================================== -->
+<!-- Simple four boxes Row -->
+<!-- ============================================================== -->
+<div fxLayout="row wrap">
+
+    <div fxFlex.gt-sm="100" fxFlex.gt-xs="100" fxFlex="100">
+        <mat-card>
+            <mat-card-content>
+                <!-- Row -->
+                <div>
+                    <mat-form-field>
+                        <mat-label>Selected Month</mat-label>
+                        <mat-select [(ngModel)]="selectedValue" name="month" (selectionChange)="this.refreshData()">
+                            <mat-option *ngFor="let month of Month" [value]="month.value">
+                                {{month.display}}
+                            </mat-option>
+                        </mat-select>
+                    </mat-form-field>
+                </div>
+            </mat-card-content>
+        </mat-card>
+    </div>
+
+    <!-- column -->
+    <div fxFlex.gt-sm="25" fxFlex.gt-xs="100" fxFlex="100">
+        <mat-card>
+            <mat-card-content>
+                <!-- Row -->
+                <div class="d-flex no-block">
+                    <!-- column -->
+                    <div class="m-r-10 no-shrink">
+                        <button mat-fab mat-card-icon class="shadow-none bg-inverse  bg-success">
+                            <mat-icon>account_circle</mat-icon>
+                        </button>
+                    </div>
+                    <!-- column -->
+                    <a href="clist">
+                        <div>
+                            <h3 class="m-0">{{clients | number : '1.0-2'}}</h3>
+                            <h6 class="text-muted m-0">MTD Clients</h6>
+                        </div>
+                    </a>
+                </div>
+            </mat-card-content>
+        </mat-card>
+    </div>
+    <!-- column -->
+    <!-- column -->
+    <div fxFlex.gt-sm="25" fxFlex.gt-xs="100" fxFlex="100">
+        <mat-card>
+            <mat-card-content>
+                <!-- Row -->
+                <div class="d-flex no-block">
+                    <!-- column -->
+                    <div class="m-r-10 no-shrink">
+                        <button mat-fab color="warn" mat-card-icon class="shadow-none  bg-warning">
+                            <mat-icon>local_mall</mat-icon>
+                        </button>
+                    </div>
+                    <!-- column -->
+                    <a href="olist">
+                        <div>
+                            <h3 class="m-0">{{orders | number : '1.0-2'}}</h3>
+                            <h6 class="text-muted m-0">MTD Orders</h6>
+                        </div>
+                    </a>
+                </div>
+            </mat-card-content>
+        </mat-card>
+    </div>
+    <!-- column -->
+    <!-- column -->
+    <div fxFlex.gt-sm="25" fxFlex.gt-xs="100" fxFlex="100">
+        <mat-card>
+            <mat-card-content>
+                <!-- Row -->
+                <div class="d-flex no-block">
+                    <!-- column -->
+                    <div class="m-r-10 no-shrink">
+                        <button mat-fab color="accent" mat-card-icon class="shadow-none">
+                            <mat-icon>stars</mat-icon>
+                        </button>
+                    </div>
+                    <!-- column -->
+                    <div>
+                        <h3 class="m-0">{{not_confirmed_order | number : '1.0-2'}}</h3>
+                        <h6 class="text-muted m-0">Not Confirmed Orders</h6>
+                    </div>
+
+                </div>
+            </mat-card-content>
+        </mat-card>
+    </div>
+    <!-- column -->
+    <!-- column -->
+    <div fxFlex.gt-sm="25" fxFlex.gt-xs="100" fxFlex="100">
+        <mat-card>
+            <mat-card-content>
+                <!-- Row -->
+                <div class="d-flex no-block">
+                    <!-- column -->
+                    <div class="m-r-10 no-shrink">
+                        <button mat-fab color="warn" mat-card-icon class="shadow-none bg-danger">
+                            <mat-icon>content_paste</mat-icon>
+                        </button>
+                    </div>
+                    <!-- column -->
+                    <div>
+                        <h3 class="m-0">{{pending_order | number : '1.0-2'}}</h3>
+                        <h6 class="text-muted m-0">Pending Orders</h6>
+                    </div>
+
+                </div>
+            </mat-card-content>
+        </mat-card>
+    </div>
+    <!-- column -->
+</div>
+<!-- ============================================================== -->
+<!-- Charts -->
+<!-- ============================================================== -->
+<div fxLayout="row wrap">
+    <!-- Column-->
+    <div fxFlex.gt-lg="100" fxFlex.gt-md="100" fxFlex.gt-xs="100" fxFlex="100">
+        <mat-card>
+            <mat-card-content>
+                <a href="olist">
+                    <mat-card-title>Number of order by date</mat-card-title>
+                </a>
+                <!-- <div class="barchrt" style="height:360px;">
+                    <ngx-charts-bar-vertical class="" [schemeType]="schemeType" [results]="barChart1.data"
+                        [gradient]="gradient" [xAxis]="showXAxis" [yAxis]="showYAxis" [legend]="showLegend"
+                        [showXAxisLabel]="showXAxisLabel" [showYAxisLabel]="showYAxisLabel"
+                        [tooltipDisabled]="tooltipDisabled" [xAxisLabel]="xAxisLabel" [yAxisLabel]="yAxisLabel"
+                        [showGridLines]="showGridLines" [barPadding]="40" [roundDomains]="roundDomains">
+                    </ngx-charts-bar-vertical>
+                </div> -->
+
+                <div class="w100">
+                    <ngx-charts-line-chart class="" [schemeType]=" schemeType" [results]="barChart1.data"
+                        [legend]="showLegend" [gradient]="gradient" [xAxis]="showXAxis" [yAxis]="showYAxis"
+                        [showXAxisLabel]="showXAxisLabel" [showYAxisLabel]="showYAxisLabel" [autoScale]="autoScale"
+                        [timeline]="timeline" [showGridLines]="showGridLines" [curve]="curve"
+                        [rangeFillOpacity]="rangeFillOpacity" [roundDomains]="roundDomains" [tooltipDisabled]="false">
+                    </ngx-charts-line-chart>
+                </div>
+
+                <div class="w100">
+                    <ngx-charts-line-chart class="" [schemeType]=" schemeType" [results]="barChart2.data"
+                        [legend]="showLegend" [gradient]="gradient" [xAxis]="showXAxis" [yAxis]="showYAxis"
+                        [showXAxisLabel]="showXAxisLabel" [showYAxisLabel]="showYAxisLabel" [autoScale]="autoScale"
+                        [timeline]="timeline" [showGridLines]="showGridLines" [curve]="curve"
+                        [rangeFillOpacity]="rangeFillOpacity" [roundDomains]="roundDomains" [tooltipDisabled]="false">
+                    </ngx-charts-line-chart>
+                </div>
+
+            </mat-card-content>
+        </mat-card>
+    </div>
+    <!-- Column-->
+    <div fxFlex.gt-lg="33" fxFlex.gt-md="33" fxFlex.gt-xs="33" fxFlex="33">
+        <mat-card>
+            <mat-card-content>
+                <mat-card-title>Order status</mat-card-title>
+
+                <div class="piechart">
+                    <ngx-charts-pie-chart class="" [results]="donuteChart1.data" [legend]="showLegend"
+                        [explodeSlices]="explodeSlices" [labels]="showLabels" [doughnut]="doughnut"
+                        [arcWidth]="arcWidth" [gradient]="gradient" [tooltipDisabled]="tooltipDisabled">
+                    </ngx-charts-pie-chart>
+                </div>
+
+            </mat-card-content>
+        </mat-card>
+    </div>
+    <!-- Column-->
+    <div fxFlex.gt-lg="33" fxFlex.gt-md="33" fxFlex.gt-xs="33" fxFlex="33">
+        <mat-card>
+            <mat-card-content>
+                <mat-card-title>Number of orders by carrier</mat-card-title>
+                <!-- <mat-card-subtitle>Different Devices Used to Visit</mat-card-subtitle> -->
+                <!-- <div class="piechart">
+                    <x-chartist class="" [data]="orderByCarrier.data" [type]="orderByCarrier.type"
+                        [options]="orderByCarrier.options" [responsiveOptions]="orderByCarrier.responsiveOptions"
+                        [events]="orderByCarrier.events"> </x-chartist>
+                </div> -->
+
+                <div class="piechart">
+                    <ngx-charts-pie-chart class="" [results]="orderByCarrier.data" [legend]="showLegend"
+                        [explodeSlices]="explodeSlices" [labels]="showLabels" [doughnut]="doughnut"
+                        [arcWidth]="arcWidth" [gradient]="gradient" [tooltipDisabled]="tooltipDisabled">
+                    </ngx-charts-pie-chart>
+                </div>
+
+            </mat-card-content>
+
+
+        </mat-card>
+    </div>
+
+
+    <div fxFlex.gt-lg="33" fxFlex.gt-md="33" fxFlex.gt-xs="33" fxFlex="33" >
+        <mat-card>
+            <mat-card-content>
+                <mat-card-title>Number of orders by customer type</mat-card-title>
+                <!-- <mat-card-subtitle>Different Devices Used to Visit</mat-card-subtitle> -->
+                <!-- <div class="piechart">
+                    <x-chartist class="" [data]="orderByCarrier.data" [type]="orderByCarrier.type"
+                        [options]="orderByCarrier.options" [responsiveOptions]="orderByCarrier.responsiveOptions"
+                        [events]="orderByCarrier.events"> </x-chartist>
+                </div> -->
+
+                <div class="piechart">
+                    <ngx-charts-pie-chart class="" [results]="orderAmount.data" [legend]="showLegend"
+                        [explodeSlices]="explodeSlices" [labels]="showLabels" [doughnut]="doughnut"
+                        [arcWidth]="arcWidth" [gradient]="gradient" [tooltipDisabled]="tooltipDisabled">
+                    </ngx-charts-pie-chart>
+                </div>
+
+            </mat-card-content>
+
+
+        </mat-card>
+    </div>
+</div>

@@ -1,0 +1,40 @@
+.customer-list-card{
+  margin: 1px;
+  text-align: left;
+}
+
+.search-text {
+
+  color: #140f45;
+  min-width: 300px;
+  max-width: 500px;
+}
+
+.container {
+  width: 95%;
+  padding: 0px 10px 0px;
+}
+
+.customer-card-header-image {
+  background-image: url('http://client.pgffm.com/assets/icons/product_icon.png');
+  background-size: cover;
+}
+
+strong {
+  color: darkblue;
+}
+
+
+table {
+  font-size: small;
+}
+
+th {
+  font: bold;
+}
+
+th, td {
+  padding: 5px;
+  text-align: left;
+  border-bottom: 1px solid #ddd;
+}
